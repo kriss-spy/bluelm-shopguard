@@ -21,3 +21,7 @@ none
 ## knowledge base
 
 none
+
+## review
+
+see shortcomings in [failed.xlsx](dataset\failed.xlsx)
