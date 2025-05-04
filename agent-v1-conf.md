@@ -1,3 +1,7 @@
+## main updates
+
+use a famous prompt template
+
 ## prompt
 
 use [prompt v1](prompt\v1.txt)
