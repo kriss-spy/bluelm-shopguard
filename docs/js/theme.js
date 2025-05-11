@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
     localStorage.setItem("theme", prefersDark ? "dark" : "light");
   }
   
-  // Set up event listeners
+  // Set up event listeners for theme toggle
   if (themeSwitcher) {
     themeSwitcher.addEventListener("click", function() {
       document.documentElement.classList.toggle("dark");

@@ -3,25 +3,31 @@ function initializeAnimations() {
   const progressBars = document.querySelectorAll(".progress-bar");
   
   const animateProgress = (bar) => {
-    const targetWidth = bar.style.width; // Get the target width set inline
-    bar.style.width = "0%"; // Reset for animation
+    // Get the target width from the inline style
+    const targetWidth = bar.style.width; 
+    // Reset for animation
+    bar.style.width = "0%"; 
+    // Slight delay to ensure transition occurs
     setTimeout(() => {
       bar.style.width = targetWidth;
-    }, 100); // Slight delay to ensure transition occurs
+    }, 100);
   };
 
+  // Use Intersection Observer to detect when elements come into view
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           animateProgress(entry.target);
-          observer.unobserve(entry.target); // Animate only once
+          // Animate only once
+          observer.unobserve(entry.target); 
         }
       });
     },
     { threshold: 0.5 }
   );
 
+  // Observe each progress bar
   progressBars.forEach((bar) => {
     observer.observe(bar);
   });

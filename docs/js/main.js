@@ -1,9 +1,20 @@
 async function loadConfig() {
   try {
-    const response = await fetch("config/config.json");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    // Try loading from the root directory first, then fallback to config folder
+    let response;
+    try {
+      response = await fetch("config.json");
+      if (!response.ok) {
+        throw new Error("Not found in root");
+      }
+    } catch (e) {
+      // Try the config directory as fallback
+      response = await fetch("config/config.json");
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
     }
+    
     const config = await response.json();
     
     // Update head
@@ -52,5 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
   loadConfig();
   
   // Initialize other components
-  initializeAnimations();
+  if (typeof initializeAnimations === 'function') {
+    initializeAnimations();
+  }
 });

@@ -33,86 +33,9 @@
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-
-      :root {
-        --primary: #5e6ad2;
-        --primary-light: #8a94e9;
-        --success: #2cb67d;
-        --warning: #ff8a00;
-        --danger: #ff5470;
-        --background-light: #ffffff;
-        --background-dark: #1a1a2e;
-        --text-light: #1a1a2e;
-        --text-dark: #f7f8f8;
-        --card-light: #f7f8fa;
-        --card-dark: #242436;
-      }
-
-      body {
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-        transition: background-color 0.3s ease, color 0.3s ease;
-      }
-
-      .animate-fade-in {
-        animation: fadeIn 0.8s ease forwards;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .animate-scale {
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-      .animate-scale:hover {
-        transform: scale(1.02);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
-          0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      }
-
-      .card-hover {
-        transition: all 0.3s ease;
-      }
-
-      .card-hover:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.15);
-      }
-
-      /* 星级评分动画 */
-      .star-rating .star {
-        display: inline-block;
-        opacity: 0;
-        animation: starFadeIn 0.3s ease forwards;
-      }
-
-      @keyframes starFadeIn {
-        from {
-          opacity: 0;
-          transform: scale(0.5);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-
-      /* 进度条动画 */
-      .progress-bar {
-        width: 0;
-        transition: width 1s ease;
-      }
-    </style>
+    <!-- External CSS files -->
+    <link href="css/main.css" rel="stylesheet" />
+    <link href="css/components.css" rel="stylesheet" />
   </head>
   <body
     class="bg-white dark:bg-[#1A1A2E] text-[#1A1A2E] dark:text-[#F7F8F8] transition-colors duration-300"
@@ -713,7 +636,7 @@
             style="animation-delay: 0.5s"
           >
             <div
-              class="w-14 h-14 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center mb-4"
+              class="w-14 h-14 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify中心 mb-4"
             >
               <i class="ri-government-line text-2xl"></i>
             </div>
@@ -1173,7 +1096,7 @@
                 style="animation-delay: 0.4s"
               >
                 <div
-                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center mb-4"
+                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items中心 justify-center mb-4"
                 >
                   <i class="ri-store-2-line text-2xl"></i>
                 </div>
@@ -1319,7 +1242,7 @@
                     </p>
                     <p class="font-medium">4.2万件</p>
                   </div>
-                  <div class="flex justify-between items-center">
+                  <div class="flex justify-between items中心">
                     <p class="text-sm text-gray-600 dark:text-gray-300">
                       数字化监测工具渗透率：
                     </p>
@@ -1353,7 +1276,7 @@
                       竞品名称
                     </th>
                     <th
-                      class="py-3 px-4 text-left border-b border-gray-200 dark:border-gray-700"
+                      class="py-3 px-4 text左 border-b border-gray-200 dark:border-gray-700"
                     >
                       优势
                     </th>
@@ -1674,7 +1597,7 @@
                       >
                     </div>
                     <div
-                      class="flex items-center justify-between p-3 bg白 dark:bg-[#242436] rounded-lg"
+                      class="flex items-center justify-between p-3 bg-white dark:bg-[#242436] rounded-lg"
                     >
                       <span class="text-gray-600 dark:text-gray-300"
                         >监管预警系统</span
@@ -1695,184 +1618,10 @@
 
     <!-- 风险与对策 -->
     <section id="risk" class="py-16 bg-[#F7F8FA] dark:bg-[#1F1F3A]"></section>
-    <script>
-      async function loadConfig() {
-        try {
-          const response = await fetch("config.json");
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          const config = await response.json();
 
-          // Update head
-          document.title = config.pageTitle;
-          updateLinkHref(
-            document.querySelector('script[src*="tailwindcss.com"]'),
-            config.externalLinks.tailwindcss
-          );
-          updateLinkHref(
-            document.querySelector('link[href*="remixicon.css"]'),
-            config.externalLinks.remixicon
-          );
-          // updateStyleImport(
-          //   document.styleSheets[0].cssRules[0],
-          //   config.externalLinks.googleFonts
-          // );
-
-          // Update header
-          document.getElementById("headerTitle").textContent =
-            config.headerTitle;
-
-          // Update hero section
-          document.getElementById("heroTitle").textContent = config.hero.title;
-          document.getElementById("heroSubtitle").textContent =
-            config.hero.subtitle;
-
-          // Update team section
-          document.getElementById("teamName").textContent = config.team.name;
-          document.getElementById("teamBackground").textContent =
-            config.team.background;
-
-          const teamMembersList = document.getElementById("teamMembers");
-          teamMembersList.innerHTML = ""; // Clear existing members
-          config.team.members.forEach((member) => {
-            const listItem = document.createElement("li");
-            listItem.className = "flex items-center";
-            let iconClass =
-              member.role === "队长" ? "ri-user-star-line" : "ri-user-line";
-            let iconBg =
-              member.role === "队长" ? "bg-[#5E6AD2]" : "bg-[#8A94E9]";
-
-            listItem.innerHTML = `
-              <span class="${iconBg} w-8 h-8 rounded-full text白 flex items-center justify-center mr-3 flex-shrink-0">
-                <i class="${iconClass}"></i>
-              </span>
-              <div>
-                <p class="font-medium">${member.name}${
-              member.role ? " (" + member.role + ")" : ""
-            }</p>
-                <p class="text-sm text-gray-600 dark:text-gray-400">${
-                  member.description
-                }</p>
-              </div>
-            `;
-            teamMembersList.appendChild(listItem);
-          });
-        } catch (error) {
-          console.error("Could not load config:", error);
-          // Optionally, update UI to show error messages if placeholders are still visible
-          document.getElementById("teamName").textContent =
-            "Error loading team name.";
-          document.getElementById("teamBackground").textContent =
-            "Error loading team background.";
-          const teamMembersList = document.getElementById("teamMembers");
-          teamMembersList.innerHTML =
-            '<li class="flex items-center">Error loading members.</li>';
-        }
-      }
-
-      function updateLinkHref(element, newHref) {
-        if (element && newHref) {
-          if (element.tagName === "SCRIPT") element.src = newHref;
-          if (element.tagName === "LINK") element.href = newHref;
-        }
-      }
-
-      // function updateStyleImport(cssImportRule, newUrl) {
-      //   if (cssImportRule && cssImportRule styleSheet && newUrl) {
-      //     const currentHref = cssImportRule.href;
-      //     // Reconstruct the @import rule with the new URL
-      //     const newImportRule = `@import url("${newUrl}");`;
-      //     // This is a bit tricky as CSSStyleSheet.insertRule or deleteRule might be needed
-      //     // For simplicity, if direct modification isn't straightforward, this might need a more robust solution
-      //     // or ensure the initial @import rule in <style> is minimal or placeholder.
-      //     // However, for this example, we'll assume the structure allows for simple replacement if possible,
-      //     // or we acknowledge this part might need more advanced handling for dynamic @import updates.
-      //     // A more robust way would be to remove the old rule and add a new one,
-      //     // or have a placeholder <link> element for this font and update its href.
-      //     // Given the limitations, we'll log if direct update isn't simple.
-      //     if (cssImportRule.href) {
-      //       // Attempting to modify href, though this is not standard for CSSImportRule
-      //       // A better approach would be to remove and re-add the rule, or use a <link> tag.
-      //       // For now, we'll leave it as a conceptual placeholder for dynamic update.
-      //       // console.log("Attempting to update @import URL. This might not work as expected in all browsers.");
-      //     }
-      //   }
-      // }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        // Load configuration
-        loadConfig();
-
-        // Set up theme switcher functionality
-        const themeSwitcher = document.getElementById("themeSwitcher");
-
-        // Check if user preference is stored
-        const savedTheme = localStorage.getItem("theme");
-
-        // Apply the saved theme or use system preference
-        if (savedTheme) {
-          // Apply saved user preference
-          document.documentElement.classList.toggle(
-            "dark",
-            savedTheme === "dark"
-          );
-        } else {
-          // Use system preference as default if no saved preference
-          const prefersDark = window.matchMedia(
-            "(prefers-color-scheme: dark)"
-          ).matches;
-          document.documentElement.classList.toggle("dark", prefersDark);
-          // Save this initial state
-          localStorage.setItem("theme", prefersDark ? "dark" : "light");
-        }
-
-        // Set up the theme toggle button
-        if (themeSwitcher) {
-          themeSwitcher.addEventListener("click", function () {
-            // Toggle dark class on the html element
-            document.documentElement.classList.toggle("dark");
-
-            // Save user preference
-            const currentTheme = document.documentElement.classList.contains(
-              "dark"
-            )
-              ? "dark"
-              : "light";
-            localStorage.setItem("theme", currentTheme);
-          });
-        } else {
-          console.error(
-            "Theme switcher element with ID 'themeSwitcher' not found!"
-          );
-        }
-      });
-
-      // Animate progress bars on scroll (remains unchanged)
-      const progressBars = document.querySelectorAll(".progress-bar");
-      const animateProgress = (bar) => {
-        const targetWidth = bar.style.width; // Already set inline
-        bar.style.width = "0%"; // Reset for animation
-        setTimeout(() => {
-          bar.style.width = targetWidth;
-        }, 100); // Slight delay to ensure transition occurs
-      };
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              animateProgress(entry.target);
-              observer.unobserve(entry.target); // Animate only once
-            }
-          });
-        },
-        { threshold: 0.5 }
-      );
-
-      progressBars.forEach((bar) => {
-        observer.observe(bar);
-      });
-    </script>
+    <!-- External JavaScript files -->
+    <script src="js/main.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/animations.js"></script>
   </body>
 </html>
