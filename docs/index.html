@@ -5,6 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>购物反诈助手Agent - 作品集</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#eff6ff",
+                100: "#dbeafe",
+                200: "#bfdbfe",
+                300: "#93c5fd",
+                400: "#60a5fa",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+                800: "#1e40af",
+                900: "#1e3a8a",
+                950: "#172554",
+              },
+            },
+          },
+        },
+      };
+    </script>
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -106,13 +130,13 @@
             购物反诈助手Agent
           </h1>
         </div>
-        <button
+        <a
           id="themeSwitcher"
           class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
         >
-          <i class="ri-sun-line dark:hidden text-xl"></i>
-          <i class="ri-moon-line hidden dark:block text-xl"></i>
-        </button>
+          <i class="ri-sun-line hidden dark:block text-xl"></i>
+          <i class="ri-moon-line block dark:hidden text-xl"></i>
+        </a>
       </div>
     </header>
 
@@ -1690,10 +1714,10 @@
             document.querySelector('link[href*="remixicon.css"]'),
             config.externalLinks.remixicon
           );
-          updateStyleImport(
-            document.styleSheets[0].cssRules[0],
-            config.externalLinks.googleFonts
-          );
+          // updateStyleImport(
+          //   document.styleSheets[0].cssRules[0],
+          //   config.externalLinks.googleFonts
+          // );
 
           // Update header
           document.getElementById("headerTitle").textContent =
@@ -1720,7 +1744,7 @@
               member.role === "队长" ? "bg-[#5E6AD2]" : "bg-[#8A94E9]";
 
             listItem.innerHTML = `
-              <span class="${iconBg} w-8 h-8 rounded-full text-white flex items-center justify-center mr-3 flex-shrink-0">
+              <span class="${iconBg} w-8 h-8 rounded-full text白 flex items-center justify-center mr-3 flex-shrink-0">
                 <i class="${iconClass}"></i>
               </span>
               <div>
@@ -1754,46 +1778,73 @@
         }
       }
 
-      function updateStyleImport(cssImportRule, newUrl) {
-        if (cssImportRule && cssImportRule.styleSheet && newUrl) {
-          const currentHref = cssImportRule.href;
-          // Reconstruct the @import rule with the new URL
-          const newImportRule = `@import url("${newUrl}");`;
-          // This is a bit tricky as CSSStyleSheet.insertRule or deleteRule might be needed
-          // For simplicity, if direct modification isn't straightforward, this might need a more robust solution
-          // or ensure the initial @import rule in <style> is minimal or placeholder.
-          // However, for this example, we'll assume the structure allows for simple replacement if possible,
-          // or we acknowledge this part might need more advanced handling for dynamic @import updates.
-          // A more robust way would be to remove the old rule and add a new one,
-          // or have a placeholder <link> element for this font and update its href.
-          // Given the limitations, we'll log if direct update isn't simple.
-          if (cssImportRule.href) {
-            // Attempting to modify href, though this is not standard for CSSImportRule
-            // A better approach would be to remove and re-add the rule, or use a <link> tag.
-            // For now, we'll leave it as a conceptual placeholder for dynamic update.
-            // console.log("Attempting to update @import URL. This might not work as expected in all browsers.");
-          }
-        }
-      }
+      // function updateStyleImport(cssImportRule, newUrl) {
+      //   if (cssImportRule && cssImportRule styleSheet && newUrl) {
+      //     const currentHref = cssImportRule.href;
+      //     // Reconstruct the @import rule with the new URL
+      //     const newImportRule = `@import url("${newUrl}");`;
+      //     // This is a bit tricky as CSSStyleSheet.insertRule or deleteRule might be needed
+      //     // For simplicity, if direct modification isn't straightforward, this might need a more robust solution
+      //     // or ensure the initial @import rule in <style> is minimal or placeholder.
+      //     // However, for this example, we'll assume the structure allows for simple replacement if possible,
+      //     // or we acknowledge this part might need more advanced handling for dynamic @import updates.
+      //     // A more robust way would be to remove the old rule and add a new one,
+      //     // or have a placeholder <link> element for this font and update its href.
+      //     // Given the limitations, we'll log if direct update isn't simple.
+      //     if (cssImportRule.href) {
+      //       // Attempting to modify href, though this is not standard for CSSImportRule
+      //       // A better approach would be to remove and re-add the rule, or use a <link> tag.
+      //       // For now, we'll leave it as a conceptual placeholder for dynamic update.
+      //       // console.log("Attempting to update @import URL. This might not work as expected in all browsers.");
+      //     }
+      //   }
+      // }
 
-      document.addEventListener("DOMContentLoaded", loadConfig);
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load configuration
+        loadConfig();
 
-      // Theme switcher logic (remains unchanged)
-      const themeSwitcher = document.getElementById("themeSwitcher");
-      const htmlElement = document.documentElement;
+        // Set up theme switcher functionality
+        const themeSwitcher = document.getElementById("themeSwitcher");
 
-      // Check for saved theme preference
-      if (localStorage.getItem("theme") === "dark") {
-        htmlElement.classList.add("dark");
-      }
+        // Check if user preference is stored
+        const savedTheme = localStorage.getItem("theme");
 
-      themeSwitcher.addEventListener("click", () => {
-        htmlElement.classList.toggle("dark");
-        // Save theme preference
-        if (htmlElement.classList.contains("dark")) {
-          localStorage.setItem("theme", "dark");
+        // Apply the saved theme or use system preference
+        if (savedTheme) {
+          // Apply saved user preference
+          document.documentElement.classList.toggle(
+            "dark",
+            savedTheme === "dark"
+          );
         } else {
-          localStorage.removeItem("theme");
+          // Use system preference as default if no saved preference
+          const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+          document.documentElement.classList.toggle("dark", prefersDark);
+          // Save this initial state
+          localStorage.setItem("theme", prefersDark ? "dark" : "light");
+        }
+
+        // Set up the theme toggle button
+        if (themeSwitcher) {
+          themeSwitcher.addEventListener("click", function () {
+            // Toggle dark class on the html element
+            document.documentElement.classList.toggle("dark");
+
+            // Save user preference
+            const currentTheme = document.documentElement.classList.contains(
+              "dark"
+            )
+              ? "dark"
+              : "light";
+            localStorage.setItem("theme", currentTheme);
+          });
+        } else {
+          console.error(
+            "Theme switcher element with ID 'themeSwitcher' not found!"
+          );
         }
       });
 
