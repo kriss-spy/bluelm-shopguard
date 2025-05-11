@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>购物反诈助手Agent - 作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+      :root {
+        --primary: #5e6ad2;
+        --primary-light: #8a94e9;
+        --success: #2cb67d;
+        --warning: #ff8a00;
+        --danger: #ff5470;
+        --background-light: #ffffff;
+        --background-dark: #1a1a2e;
+        --text-light: #1a1a2e;
+        --text-dark: #f7f8f8;
+        --card-light: #f7f8fa;
+        --card-dark: #242436;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .animate-fade-in {
+        animation: fadeIn 0.8s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-scale {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .animate-scale:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.15);
+      }
+
+      /* 星级评分动画 */
+      .star-rating .star {
+        display: inline-block;
+        opacity: 0;
+        animation: starFadeIn 0.3s ease forwards;
+      }
+
+      @keyframes starFadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* 进度条动画 */
+      .progress-bar {
+        width: 0;
+        transition: width 1s ease;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-white dark:bg-[#1A1A2E] text-[#1A1A2E] dark:text-[#F7F8F8] transition-colors duration-300"
+  >
+    <!-- 顶部导航 -->
+    <header
+      class="sticky top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-[#1A1A2E]/90 border-b border-gray-200 dark:border-gray-800"
+    >
+      <div
+        class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center"
+      >
+        <div class="flex items-center space-x-2">
+          <i class="ri-shield-check-line text-[#5E6AD2] text-2xl"></i>
+          <h1 id="headerTitle" class="text-xl font-bold tracking-tight">
+            购物反诈助手Agent
+          </h1>
+        </div>
+        <button
+          id="themeSwitcher"
+          class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+        >
+          <i class="ri-sun-line dark:hidden text-xl"></i>
+          <i class="ri-moon-line hidden dark:block text-xl"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- 英雄区 -->
+    <section
+      class="relative overflow-hidden py-16 sm:py-24 bg-gradient-to-br from-white to-[#F7F8FA] dark:from-[#1A1A2E] dark:to-[#242436]"
+    >
+      <div class="container mx-auto px-4 sm:px-6">
+        <div
+          class="max-w-3xl mx-auto text-center animate-fade-in"
+          style="animation-delay: 0.1s"
+        >
+          <h1
+            id="heroTitle"
+            class="text-4xl sm:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#5E6AD2] to-[#8A94E9] leading-tight"
+          >
+            购物反诈助手Agent
+          </h1>
+          <p
+            id="heroSubtitle"
+            class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8"
+          >
+            基于vivo
+            Agent平台与蓝心大模型，打造拟人化、多维度、动态验证的购物风险分析工具
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <button
+              class="px-6 py-3 bg-[#5E6AD2] hover:bg-[#4A59C7] text-white font-medium rounded-lg transition-colors duration-200 animate-scale flex items-center"
+            >
+              <i class="ri-play-circle-line mr-2"></i>
+              查看演示
+            </button>
+            <button
+              class="px-6 py-3 bg-white dark:bg-[#242436] border border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200 animate-scale flex items-center"
+            >
+              <i class="ri-information-line mr-2"></i>
+              了解更多
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- 背景装饰 -->
+      <div
+        class="absolute -top-10 -right-10 w-60 h-60 bg-[#5E6AD2]/10 dark:bg-[#5E6AD2]/5 rounded-full blur-3xl"
+      ></div>
+      <div
+        class="absolute -bottom-20 -left-20 w-80 h-80 bg-[#8A94E9]/10 dark:bg-[#8A94E9]/5 rounded-full blur-3xl"
+      ></div>
+    </section>
+
+    <!-- 团队介绍 -->
+    <section id="team" class="py-16 bg-white dark:bg-[#1A1A2E]">
+      <div class="container mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+          <span class="inline-block relative">
+            团队介绍
+            <span
+              class="absolute -bottom-2 left-0 w-full h-1 bg-[#5E6AD2]/30 rounded"
+            ></span>
+          </span>
+        </h2>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
+        >
+          <!-- 团队信息卡 -->
+          <div
+            class="rounded-xl overflow-hidden bg-[#F7F8FA] dark:bg-[#242436] p-6 border border-gray-100 dark:border-gray-800 card-hover animate-fade-in"
+            style="animation-delay: 0.2s"
+          >
+            <div class="flex items-center mb-4">
+              <div
+                class="w-12 h-12 rounded-full flex items-center justify-center bg-[#5E6AD2]/10 text-[#5E6AD2]"
+              >
+                <i class="ri-team-line text-xl"></i>
+              </div>
+              <div class="ml-4">
+                <h3 id="teamCardTitle" class="font-semibold text-xl">
+                  团队名称
+                </h3>
+                <p id="teamName" class="text-gray-600 dark:text-gray-300">
+                  Loading team name...
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 成员信息 -->
+          <div
+            class="rounded-xl overflow-hidden bg-[#F7F8FA] dark:bg-[#242436] p-6 border border-gray-100 dark:border-gray-800 card-hover animate-fade-in"
+            style="animation-delay: 0.3s"
+          >
+            <div class="mb-4">
+              <h3 id="teamMembersTitle" class="font-semibold text-xl mb-3">
+                团队成员
+              </h3>
+              <ul id="teamMembers" class="space-y-3">
+                <li class="flex items-center">Loading members...</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- 团队背景 -->
+          <div
+            class="rounded-xl overflow-hidden bg-[#F7F8FA] dark:bg-[#242436] p-6 border border-gray-100 dark:border-gray-800 card-hover animate-fade-in"
+            style="animation-delay: 0.4s"
+          >
+            <div class="mb-4">
+              <h3 id="teamBackgroundTitle" class="font-semibold text-xl mb-3">
+                团队背景
+              </h3>
+              <p id="teamBackground" class="text-gray-600 dark:text-gray-300">
+                Loading team background...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 背景与痛点 -->
+    <section id="background" class="py-16 bg-[#F7F8FA] dark:bg-[#1F1F3A]">
+      <div class="container mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+          <span class="inline-block relative">
+            背景与痛点
+            <span
+              class="absolute -bottom-2 left-0 w-full h-1 bg-[#5E6AD2]/30 rounded"
+            ></span>
+          </span>
+        </h2>
+
+        <div class="max-w-4xl mx-auto">
+          <p
+            class="text-lg mb-8 text-center text-gray-700 dark:text-gray-300 animate-fade-in"
+            style="animation-delay: 0.2s"
+          >
+            在电商、社交平台和二手交易市场中，虚假广告、低价诱骗、脱离平台交易等欺诈手段层出不穷，消费者往往难以辨别真伪。
+          </p>
+
+          <!-- 痛点卡片 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+              style="animation-delay: 0.3s"
+            >
+              <div class="flex items-center mb-4">
+                <span
+                  class="w-10 h-10 rounded-full bg-[#FF5470]/10 text-[#FF5470] flex items-center justify-center mr-3"
+                >
+                  <i class="ri-price-tag-3-line"></i>
+                </span>
+                <h3 class="font-semibold text-lg">价格欺诈</h3>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300">
+                远低于市场价的商品（如"2999元的iPhone 15 Pro
+                Max"）诱导冲动消费。
+              </p>
+            </div>
+
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+              style="animation-delay: 0.4s"
+            >
+              <div class="flex items-center mb-4">
+                <span
+                  class="w-10 h-10 rounded-full bg-[#FF8A00]/10 text-[#FF8A00] flex items-center justify-center mr-3"
+                >
+                  <i class="ri-advertisement-line"></i>
+                </span>
+                <h3 class="font-semibold text-lg">虚假宣传</h3>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300">
+                夸大功效（如"一次美白3度"）、虚构权威背书（如"NASA技术认证"）。
+              </p>
+            </div>
+
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+              style="animation-delay: 0.5s"
+            >
+              <div class="flex items-center mb-4">
+                <span
+                  class="w-10 h-10 rounded-full bg-[#FF5470]/10 text-[#FF5470] flex items-center justify-center mr-3"
+                >
+                  <i class="ri-secure-payment-line"></i>
+                </span>
+                <h3 class="font-semibold text-lg">支付风险</h3>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300">
+                卖家引导微信私下转账，脱离平台担保，导致资金无法追回。
+              </p>
+            </div>
+
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+              style="animation-delay: 0.6s"
+            >
+              <div class="flex items-center mb-4">
+                <span
+                  class="w-10 h-10 rounded-full bg-[#FF8A00]/10 text-[#FF8A00] flex items-center justify-center mr-3"
+                >
+                  <i class="ri-store-line"></i>
+                </span>
+                <h3 class="font-semibold text-lg">平台可信度</h3>
+              </div>
+              <p class="text-gray-600 dark:text-gray-300">
+                非正规渠道（如个人闲鱼卖家）假货率高，缺乏售后保障。
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="bg-[#5E6AD2]/10 dark:bg-[#5E6AD2]/20 border border-[#5E6AD2]/20 rounded-xl p-6 text-gray-700 dark:text-gray-300 animate-fade-in"
+            style="animation-delay: 0.7s"
+          >
+            <p class="font-medium text-center">
+              传统反诈手段依赖人工经验或简单关键词匹配，无法结合语义理解、动态数据验证和风险量化评估，导致消费者仍面临较高受骗风险。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 创新点与解决方案 -->
+    <section id="innovation" class="py-16 bg-white dark:bg-[#1A1A2E]">
+      <div class="container mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+          <span class="inline-block relative">
+            创新点与解决方案
+            <span
+              class="absolute -bottom-2 left-0 w-full h-1 bg-[#5E6AD2]/30 rounded"
+            ></span>
+          </span>
+        </h2>
+
+        <div class="max-w-4xl mx-auto">
+          <p
+            class="text-lg mb-10 text-center text-gray-700 dark:text-gray-300 animate-fade-in"
+            style="animation-delay: 0.2s"
+          >
+            本项目基于vivo
+            Agent平台+蓝心大模型（70B），打造一个拟人化、多维度、动态验证的购物反诈助手。
+          </p>
+
+          <!-- 创新点卡片区 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- 拟人化交互体验 -->
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow card-hover animate-fade-in"
+              style="animation-delay: 0.3s"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center"
+                >
+                  <i class="ri-user-smile-line text-2xl"></i>
+                </div>
+                <h3 class="ml-4 font-semibold text-xl">拟人化交互体验</h3>
+              </div>
+              <ul class="space-y-3 pl-4">
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    采用客服聊天风格，结合温和表情，提升用户信任感
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    每次回复自动生成后续问题引导（如"需要查卖家历史记录吗？"），增强交互连贯性
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- 多维度欺诈分析 -->
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow card-hover animate-fade-in"
+              style="animation-delay: 0.4s"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center"
+                >
+                  <i class="ri-dashboard-3-line text-2xl"></i>
+                </div>
+                <h3 class="ml-4 font-semibold text-xl">多维度欺诈分析</h3>
+              </div>
+              <ul class="space-y-3 pl-4">
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    价格合理性：调用工作流"判断商品价格是否合理"，对比市场价与历史数据
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    平台可信度：通过"判断平台是否可信"工作流，分析店铺评分、授权资质等
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    宣传真实性：识别绝对化用语（"第一""彻底根治"）、医疗效果宣称等违规话术
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    支付安全：检测是否引导脱离平台交易（如"加微信转账"）
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- 动态验证与风险量化 -->
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow card-hover animate-fade-in"
+              style="animation-delay: 0.5s"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center"
+                >
+                  <i class="ri-bar-chart-box-line text-2xl"></i>
+                </div>
+                <h3 class="ml-4 font-semibold text-xl">动态验证与风险量化</h3>
+              </div>
+              <ul class="space-y-3 pl-4">
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    强制联网搜索：对存疑信息（如专利号、品牌备案）实时验证
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    风险星级评分（0-10星）：直观展示欺诈概率
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    关键风险点标注：用"重点""最大风险"高亮核心问题
+                  </p>
+                </li>
+              </ul>
+
+              <!-- 星级评分演示 -->
+              <div class="mt-4 p-4 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                  风险评分示例：
+                </p>
+                <div class="star-rating text-[#FF8A00]">
+                  <span class="star" style="animation-delay: 0.1s">⭐</span>
+                  <span class="star" style="animation-delay: 0.2s">⭐</span>
+                  <span class="star" style="animation-delay: 0.3s">⭐</span>
+                  <span class="star" style="animation-delay: 0.4s">⭐</span>
+                  <span class="star" style="animation-delay: 0.5s">⭐</span>
+                  <span class="star" style="animation-delay: 0.6s">⭐</span>
+                  <span class="star" style="animation-delay: 0.7s">⭐</span>
+                  <span
+                    class="text-[#1A1A2E] dark:text-[#F7F8F8] font-medium ml-2"
+                    >7/10星</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <!-- 明确结论与建议 -->
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-md transition-shadow card-hover animate-fade-in"
+              style="animation-delay: 0.6s"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center"
+                >
+                  <i class="ri-lightbulb-line text-2xl"></i>
+                </div>
+                <h3 class="ml-4 font-semibold text-xl">明确结论与建议</h3>
+              </div>
+              <ul class="space-y-3 pl-4">
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    即使信息模糊，也强制输出倾向性结论（如"不可信"），避免模棱两可
+                  </p>
+                </li>
+                <li class="flex items-start">
+                  <i
+                    class="ri-checkbox-circle-line text-[#2CB67D] mt-1 mr-2"
+                  ></i>
+                  <p class="text-gray-600 dark:text-gray-300">
+                    提供具体行动建议（如"同城验货""走平台担保支付"）
+                  </p>
+                </li>
+              </ul>
+
+              <!-- 结论建议演示 -->
+              <div
+                class="mt-4 p-4 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg border-l-4 border-[#FF5470]"
+              >
+                <div class="flex items-center mb-2">
+                  <i class="ri-error-warning-line text-[#FF5470] mr-2"></i>
+                  <p class="font-medium text-[#FF5470]">风险较高，不建议购买</p>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300">
+                  建议：选择官方授权渠道，避免私下交易，使用平台担保支付
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 技术差异化 -->
+          <div class="mt-12">
+            <h3 class="text-2xl font-semibold mb-6 text-center">技术差异化</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-[#F7F8FA] dark:bg-[#242436]">
+                    <th
+                      class="py-3 px-4 text-left border-b border-gray-200 dark:border-gray-700"
+                    >
+                      竞品/传统方案
+                    </th>
+                    <th
+                      class="py-3 px-4 text-left border-b border-gray-200 dark:border-gray-700"
+                    >
+                      本项目优势
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="animate-fade-in" style="animation-delay: 0.3s">
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      人工经验判断
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 text-[#2CB67D]"
+                    >
+                      AI自动化分析，覆盖全网动态数据
+                    </td>
+                  </tr>
+                  <tr class="animate-fade-in" style="animation-delay: 0.4s">
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      关键词匹配
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 text-[#2CB67D]"
+                    >
+                      语义理解+逻辑推理，识别话术套路
+                    </td>
+                  </tr>
+                  <tr class="animate-fade-in" style="animation-delay: 0.5s">
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      单一维度检测
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 text-[#2CB67D]"
+                    >
+                      价格+平台+宣传+支付多维度综合评估
+                    </td>
+                  </tr>
+                  <tr class="animate-fade-in" style="animation-delay: 0.6s">
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      无风险量化
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 text-[#2CB67D]"
+                    >
+                      星级评分+关键风险点标注，结果更直观
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 应用场景 -->
+    <section id="application" class="py-16 bg-[#F7F8FA] dark:bg-[#1F1F3A]">
+      <div class="container mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+          <span class="inline-block relative">
+            应用场景
+            <span
+              class="absolute -bottom-2 left-0 w-full h-1 bg-[#5E6AD2]/30 rounded"
+            ></span>
+          </span>
+        </h2>
+
+        <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- 消费者 -->
+          <div
+            class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+            style="animation-delay: 0.3s"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center mb-4"
+            >
+              <i class="ri-user-3-line text-2xl"></i>
+            </div>
+            <h3 class="font-semibold text-xl mb-3">消费者</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-3">
+              快速验证商品/卖家可信度，避免冲动消费。
+            </p>
+            <div
+              class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg text-sm text-gray-500 dark:text-gray-400"
+            >
+              用户提问："这个价格靠谱吗？"<br />
+              "客服让我加微信转账可以吗？"
+            </div>
+          </div>
+
+          <!-- 电商平台 -->
+          <div
+            class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+            style="animation-delay: 0.4s"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center mb-4"
+            >
+              <i class="ri-store-2-line text-2xl"></i>
+            </div>
+            <h3 class="font-semibold text-xl mb-3">电商平台</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-3">
+              集成至客服系统，辅助审核违规广告。
+            </p>
+            <div
+              class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg text-sm text-gray-500 dark:text-gray-400"
+            >
+              自动识别高风险商品描述<br />
+              监控第三方卖家行为，减少投诉
+            </div>
+          </div>
+
+          <!-- 监管部门 -->
+          <div
+            class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+            style="animation-delay: 0.5s"
+          >
+            <div
+              class="w-14 h-14 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center mb-4"
+            >
+              <i class="ri-government-line text-2xl"></i>
+            </div>
+            <h3 class="font-semibold text-xl mb-3">监管部门</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-3">
+              监测市场欺诈行为，定位高风险店铺。
+            </p>
+            <div
+              class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg text-sm text-gray-500 dark:text-gray-400"
+            >
+              批量分析消费者投诉数据<br />
+              识别新兴诈骗套路，发布预警
+            </div>
+          </div>
+        </div>
+
+        <!-- 社会价值 -->
+        <div
+          class="max-w-4xl mx-auto mt-12 p-6 bg-white dark:bg-[#242436] rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm animate-fade-in"
+          style="animation-delay: 0.6s"
+        >
+          <h3 class="font-semibold text-xl mb-4 flex items-center">
+            <i class="ri-heart-pulse-line text-[#5E6AD2] mr-2"></i>
+            社会价值
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">
+            通过降低购物欺诈风险，提升消费者信任度，推动电商生态健康发展。未来可扩展至多模态分析（图片/视频广告）和跨境购物反诈场景。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技术方案 -->
+    <section id="technology" class="py-16 bg-white dark:bg-[#1A1A2E]">
+      <div class="container mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+          <span class="inline-block relative">
+            技术方案
+            <span
+              class="absolute -bottom-2 left-0 w-full h-1 bg-[#5E6AD2]/30 rounded"
+            ></span>
+          </span>
+        </h2>
+
+        <div class="max-w-5xl mx-auto">
+          <!-- 技术架构 -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold mb-6">核心组件</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-[#F7F8FA] dark:bg-[#242436]">
+                    <th
+                      class="py-3 px-4 text-left border-b border-gray-200 dark:border-gray-700"
+                    >
+                      组件名称
+                    </th>
+                    <th
+                      class="py-3 px-4 text-left border-b border-gray-200 dark:border-gray-700"
+                    >
+                      功能描述
+                    </th>
+                    <th
+                      class="py-3 px-4 text-left border-b border-gray-200 dark:border-gray-700"
+                    >
+                      调用方式
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="animate-fade-in" style="animation-delay: 0.3s">
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 font-medium"
+                    >
+                      蓝心大模型-70B
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      主分析引擎，执行文本理解和推理
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      每次对话强制调用
+                    </td>
+                  </tr>
+                  <tr class="animate-fade-in" style="animation-delay: 0.4s">
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 font-medium"
+                    >
+                      联网搜索插件
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      实时数据验证
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      每次对话强制调用
+                    </td>
+                  </tr>
+                  <tr class="animate-fade-in" style="animation-delay: 0.5s">
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 font-medium"
+                    >
+                      诈骗知识库
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      内置200+欺诈话术模板
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      自动匹配调用
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- 工作流配置 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- 价格合理性分析工作流 -->
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+              style="animation-delay: 0.3s"
+            >
+              <h3 class="font-semibold text-xl mb-4 flex items-center">
+                <i class="ri-price-tag-3-line text-[#5E6AD2] mr-2"></i>
+                价格合理性分析工作流
+              </h3>
+              <div class="space-y-3">
+                <div class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                  <p
+                    class="text-sm font-medium text-gray-600 dark:text-gray-300"
+                  >
+                    输入：
+                  </p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    商品名称+价格（字符串）
+                  </p>
+                </div>
+                <div class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                  <p
+                    class="text-sm font-medium text-gray-600 dark:text-gray-300"
+                  >
+                    处理流程：
+                  </p>
+                  <ol
+                    class="text-sm text-gray-500 dark:text-gray-400 pl-5 list-decimal"
+                  >
+                    <li>提取商品价格（大语言模型3）</li>
+                    <li>联网搜索市场价（联网搜索组件）</li>
+                    <li>生成价格对比报告（大语言模型2）</li>
+                  </ol>
+                </div>
+                <div class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                  <p
+                    class="text-sm font-medium text-gray-600 dark:text-gray-300"
+                  >
+                    输出：
+                  </p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    价格偏离度分析（字符串）
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- 平台可信度评估工作流 -->
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+              style="animation-delay: 0.4s"
+            >
+              <h3 class="font-semibold text-xl mb-4 flex items-center">
+                <i class="ri-store-line text-[#5E6AD2] mr-2"></i>
+                平台可信度评估工作流
+              </h3>
+              <div class="space-y-3">
+                <div class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                  <p
+                    class="text-sm font-medium text-gray-600 dark:text-gray-300"
+                  >
+                    输入：
+                  </p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    平台名称（字符串）
+                  </p>
+                </div>
+                <div class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                  <p
+                    class="text-sm font-medium text-gray-600 dark:text-gray-300"
+                  >
+                    处理流程：
+                  </p>
+                  <ol
+                    class="text-sm text-gray-500 dark:text-gray-400 pl-5 list-decimal"
+                  >
+                    <li>联网搜索平台投诉记录（联网搜索组件）</li>
+                    <li>综合评估风险等级（大语言模型2）</li>
+                  </ol>
+                </div>
+                <div class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                  <p
+                    class="text-sm font-medium text-gray-600 dark:text-gray-300"
+                  >
+                    输出：
+                  </p>
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    平台风险评级（字符串）
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 数据处理与性能指标 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- 数据处理 -->
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+              style="animation-delay: 0.5s"
+            >
+              <h3 class="font-semibold text-xl mb-4">数据处理规范</h3>
+
+              <div class="mb-4">
+                <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  数据流向
+                </h4>
+                <div
+                  class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg text-sm text-gray-500 dark:text-gray-400"
+                >
+                  用户输入→工作流并行处理→大模型综合判断→结果格式化输出
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  数据保留策略
+                </h4>
+                <ul class="space-y-2">
+                  <li class="flex items-center">
+                    <i class="ri-delete-bin-line text-[#FF5470] mr-2"></i>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                      用户原始输入：分析完成后立即删除
+                    </p>
+                  </li>
+                  <li class="flex items-center">
+                    <i class="ri-time-line text-[#5E6AD2] mr-2"></i>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                      分析结果日志：匿名存储30天
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- 性能指标 -->
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+              style="animation-delay: 0.6s"
+            >
+              <h3 class="font-semibold text-xl mb-4">性能指标</h3>
+
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <p
+                      class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      响应时间
+                    </p>
+                    <p class="text-sm font-medium text-[#2CB67D]">≤3秒</p>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                  >
+                    <div
+                      class="bg-[#2CB67D] h-2.5 rounded-full progress-bar"
+                      style="width: 90%"
+                    ></div>
+                  </div>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    测量方式：端到端测试
+                  </p>
+                </div>
+
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <p
+                      class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      工作流调用成功率
+                    </p>
+                    <p class="text-sm font-medium text-[#2CB67D]">100%</p>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                  >
+                    <div
+                      class="bg-[#2CB67D] h-2.5 rounded-full progress-bar"
+                      style="width: 100%"
+                    ></div>
+                  </div>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    测量方式：服务监控
+                  </p>
+                </div>
+
+                <div>
+                  <div class="flex justify-between mb-1">
+                    <p
+                      class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      风险识别准确率
+                    </p>
+                    <p class="text-sm font-medium text-[#2CB67D]">≥85%</p>
+                  </div>
+                  <div
+                    class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5"
+                  >
+                    <div
+                      class="bg-[#2CB67D] h-2.5 rounded-full progress-bar"
+                      style="width: 85%"
+                    ></div>
+                  </div>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    测量方式：千例测试集验证
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 交互实现 -->
+          <div
+            class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm animate-fade-in"
+            style="animation-delay: 0.7s"
+          >
+            <h3 class="font-semibold text-xl mb-4">交互实现</h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              每轮对话必须包含以下要素：
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div
+                class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg flex items-center space-x-3"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-[#FF8A00]/10 text-[#FF8A00] flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="ri-star-line"></i>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300">
+                  风险星级（0-10⭐）
+                </p>
+              </div>
+
+              <div
+                class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg flex items-center space-x-3"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-[#FF5470]/10 text-[#FF5470] flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="ri-error-warning-line"></i>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300">
+                  关键风险点（⚠标注）
+                </p>
+              </div>
+
+              <div
+                class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg flex items-center space-x-3"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-[#2CB67D]/10 text-[#2CB67D] flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="ri-list-check-2"></i>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300">
+                  具体建议（分点列出）
+                </p>
+              </div>
+
+              <div
+                class="p-3 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg flex items-center space-x-3"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center flex-shrink-0"
+                >
+                  <i class="ri-question-line"></i>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-300">
+                  后续问题建议（1-2条）
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 市场分析 -->
+    <section id="market" class="py-16 bg-[#F7F8FA] dark:bg-[#1F1F3A]">
+      <div class="container mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+          <span class="inline-block relative">
+            市场分析
+            <span
+              class="absolute -bottom-2 left-0 w-full h-1 bg-[#5E6AD2]/30 rounded"
+            ></span>
+          </span>
+        </h2>
+
+        <div class="max-w-5xl mx-auto">
+          <!-- 目标用户群体 -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold mb-6">目标用户群体</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <!-- 普通消费者 -->
+              <div
+                class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+                style="animation-delay: 0.3s"
+              >
+                <div
+                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center mb-4"
+                >
+                  <i class="ri-user-3-line text-2xl"></i>
+                </div>
+                <h4 class="font-semibold text-lg mb-3">普通消费者</h4>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                  <span class="font-medium">核心需求：</span
+                  ><br />快速验证商品/卖家可信度，避免受骗
+                </p>
+                <div class="text-sm text-gray-600 dark:text-gray-300">
+                  <span class="font-medium">使用场景：</span>
+                  <ul
+                    class="mt-1 space-y-1 pl-5 list-disc text-gray-500 dark:text-gray-400"
+                  >
+                    <li>网购前咨询（如"这个价格靠谱吗？"）</li>
+                    <li>交易中风险预警（如"客服让微信转账"）</li>
+                    <li>大额商品购买前二次确认（如数码产品、奢侈品）</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 电商平台 -->
+              <div
+                class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+                style="animation-delay: 0.4s"
+              >
+                <div
+                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center mb-4"
+                >
+                  <i class="ri-store-2-line text-2xl"></i>
+                </div>
+                <h4 class="font-semibold text-lg mb-3">电商平台</h4>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                  <span class="font-medium">核心需求：</span
+                  ><br />辅助审核违规广告，降低平台投诉率
+                </p>
+                <div class="text-sm text-gray-600 dark:text-gray-300">
+                  <span class="font-medium">使用场景：</span>
+                  <ul
+                    class="mt-1 space-y-1 pl-5 list-disc text-gray-500 dark:text-gray-400"
+                  >
+                    <li>集成至客服系统，自动识别高风险商品描述</li>
+                    <li>监控第三方卖家行为，减少假货投诉</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 监管部门 -->
+              <div
+                class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+                style="animation-delay: 0.5s"
+              >
+                <div
+                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center mb-4"
+                >
+                  <i class="ri-government-line text-2xl"></i>
+                </div>
+                <h4 class="font-semibold text-lg mb-3">监管部门</h4>
+                <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                  <span class="font-medium">核心需求：</span
+                  ><br />监测市场欺诈行为，定位高风险店铺
+                </p>
+                <div class="text-sm text-gray-600 dark:text-gray-300">
+                  <span class="font-medium">使用场景：</span>
+                  <ul
+                    class="mt-1 space-y-1 pl-5 list-disc text-gray-500 dark:text-gray-400"
+                  >
+                    <li>批量分析消费者投诉数据</li>
+                    <li>识别新兴诈骗套路，发布预警</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 市场规模与增长潜力 -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold mb-6">市场规模与增长潜力</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <!-- 消费者端市场 -->
+              <div
+                class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+                style="animation-delay: 0.3s"
+              >
+                <h4 class="font-semibold text-lg mb-4 flex items-center">
+                  <i class="ri-shopping-cart-line text-[#5E6AD2] mr-2"></i>
+                  消费者端市场
+                </h4>
+
+                <div class="space-y-3">
+                  <div class="flex justify-between items-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      中国网购用户规模：
+                    </p>
+                    <p class="font-medium">8.4亿人</p>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      曾遭遇购物欺诈比例：
+                    </p>
+                    <p class="font-medium">约30%</p>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      年需求规模：
+                    </p>
+                    <p class="font-medium text-[#5E6AD2]">超2.5亿人</p>
+                  </div>
+                </div>
+
+                <div
+                  class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700"
+                >
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-medium">增长驱动：</span
+                    >直播电商、二手交易平台等新兴购物方式带来的新型诈骗风险
+                  </p>
+                </div>
+              </div>
+
+              <!-- 企业端市场 -->
+              <div
+                class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+                style="animation-delay: 0.4s"
+              >
+                <h4 class="font-semibold text-lg mb-4 flex items-center">
+                  <i class="ri-building-line text-[#5E6AD2] mr-2"></i>
+                  企业端市场
+                </h4>
+
+                <div class="space-y-3">
+                  <div class="flex justify-between items-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      头部电商平台年审核成本：
+                    </p>
+                    <p class="font-medium">数亿元</p>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      AI工具替代潜力：
+                    </p>
+                    <p class="font-medium text-[#2CB67D]">降低20%+成本</p>
+                  </div>
+                </div>
+
+                <div
+                  class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700"
+                >
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-medium">目标客户：</span
+                    >中小电商平台（预算有限但反诈需求强烈）
+                  </p>
+                </div>
+              </div>
+
+              <!-- 监管端市场 -->
+              <div
+                class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+                style="animation-delay: 0.5s"
+              >
+                <h4 class="font-semibold text-lg mb-4 flex items-center">
+                  <i class="ri-government-line text-[#5E6AD2] mr-2"></i>
+                  监管端市场
+                </h4>
+
+                <div class="space-y-3">
+                  <div class="flex justify-between items-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      2023年虚假广告案件：
+                    </p>
+                    <p class="font-medium">4.2万件</p>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <p class="text-sm text-gray-600 dark:text-gray-300">
+                      数字化监测工具渗透率：
+                    </p>
+                    <p class="font-medium text-[#FF8A00]">不足10%</p>
+                  </div>
+                </div>
+
+                <div
+                  class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700"
+                >
+                  <p class="text-sm text-gray-500 dark:text-gray-400">
+                    <span class="font-medium">政策驱动：</span
+                    >《网络交易监督管理办法》要求加强平台监管
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 竞争分析 -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold mb-6">竞争分析</h3>
+
+            <div class="overflow-x-auto mb-8">
+              <table class="w-full border-collapse">
+                <thead>
+                  <tr class="bg-[#F7F8FA] dark:bg-[#242436]">
+                    <th
+                      class="py-3 px-4 text-left border-b border-gray-200 dark:border-gray-700"
+                    >
+                      竞品名称
+                    </th>
+                    <th
+                      class="py-3 px-4 text-left border-b border-gray-200 dark:border-gray-700"
+                    >
+                      优势
+                    </th>
+                    <th
+                      class="py-3 px-4 text-left border-b border-gray-200 dark:border-gray-700"
+                    >
+                      劣势
+                    </th>
+                    <th
+                      class="py-3 px-4 text-left border-b border-gray-200 dark:border-gray-700"
+                    >
+                      本项目优势
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="animate-fade-in" style="animation-delay: 0.3s">
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 font-medium"
+                    >
+                      微信谣言过滤器
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      用户基数大
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 text-[#FF5470]"
+                    >
+                      仅限谣言检测
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 text-[#2CB67D]"
+                    >
+                      垂直领域深度分析
+                    </td>
+                  </tr>
+                  <tr class="animate-fade-in" style="animation-delay: 0.4s">
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 font-medium"
+                    >
+                      浏览器风险拦截
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      自动防护
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 text-[#FF5470]"
+                    >
+                      仅限网址判断
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 text-[#2CB67D]"
+                    >
+                      多维度动态验证
+                    </td>
+                  </tr>
+                  <tr class="animate-fade-in" style="animation-delay: 0.5s">
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 font-medium"
+                    >
+                      平台审核系统
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700"
+                    >
+                      数据直接
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 text-[#FF5470]"
+                    >
+                      规则僵化
+                    </td>
+                    <td
+                      class="py-3 px-4 border-b border-gray-200 dark:border-gray-700 text-[#2CB67D]"
+                    >
+                      拟人化交互体验
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- 竞争优势 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div
+                class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm animate-fade-in"
+                style="animation-delay: 0.6s"
+              >
+                <h4 class="font-semibold text-lg mb-4 flex items-center">
+                  <i class="ri-code-box-line text-[#5E6AD2] mr-2"></i>
+                  技术优势
+                </h4>
+                <ul class="space-y-2">
+                  <li class="flex items-start">
+                    <i class="ri-check-line text-[#2CB67D] mt-1 mr-2"></i>
+                    <p class="text-gray-600 dark:text-gray-300">
+                      蓝心大模型（70B）的深度语义理解
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="ri-check-line text-[#2CB67D] mt-1 mr-2"></i>
+                    <p class="text-gray-600 dark:text-gray-300">
+                      动态工作流（价格+平台+支付多维度分析）
+                    </p>
+                  </li>
+                </ul>
+              </div>
+
+              <div
+                class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm animate-fade-in"
+                style="animation-delay: 0.7s"
+              >
+                <h4 class="font-semibold text-lg mb-4 flex items-center">
+                  <i class="ri-database-2-line text-[#5E6AD2] mr-2"></i>
+                  数据优势
+                </h4>
+                <ul class="space-y-2">
+                  <li class="flex items-start">
+                    <i class="ri-check-line text-[#2CB67D] mt-1 mr-2"></i>
+                    <p class="text-gray-600 dark:text-gray-300">
+                      10万+欺诈案例知识库
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="ri-check-line text-[#2CB67D] mt-1 mr-2"></i>
+                    <p class="text-gray-600 dark:text-gray-300">
+                      实时联网验证能力
+                    </p>
+                  </li>
+                </ul>
+              </div>
+
+              <div
+                class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm animate-fade-in"
+                style="animation-delay: 0.8s"
+              >
+                <h4 class="font-semibold text-lg mb-4 flex items-center">
+                  <i class="ri-user-smile-line text-[#5E6AD2] mr-2"></i>
+                  体验优势
+                </h4>
+                <ul class="space-y-2">
+                  <li class="flex items-start">
+                    <i class="ri-check-line text-[#2CB67D] mt-1 mr-2"></i>
+                    <p class="text-gray-600 dark:text-gray-300">
+                      拟人化客服交互设计
+                    </p>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="ri-check-line text-[#2CB67D] mt-1 mr-2"></i>
+                    <p class="text-gray-600 dark:text-gray-300">
+                      直观的风险星级展示
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 商业模式 -->
+    <section id="business" class="py-16 bg-white dark:bg-[#1A1A2E]">
+      <div class="container mx-auto px-4 sm:px-6">
+        <h2 class="text-3xl font-bold mb-12 text-center">
+          <span class="inline-block relative">
+            商业模式
+            <span
+              class="absolute -bottom-2 left-0 w-full h-1 bg-[#5E6AD2]/30 rounded"
+            ></span>
+          </span>
+        </h2>
+
+        <div class="max-w-4xl mx-auto">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- 短期计划 -->
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+              style="animation-delay: 0.3s"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center"
+                >
+                  <i class="ri-calendar-line text-2xl"></i>
+                </div>
+                <h3 class="ml-4 font-semibold text-xl">短期计划（1年内）</h3>
+              </div>
+
+              <div class="space-y-4">
+                <div class="p-4 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                  <h4 class="font-medium text-lg mb-2 flex items-center">
+                    <i class="ri-user-line text-[#5E6AD2] mr-2"></i>
+                    ToC服务
+                  </h4>
+                  <div
+                    class="flex items-center justify-between p-3 bg-white dark:bg-[#242436] rounded-lg"
+                  >
+                    <span class="text-gray-600 dark:text-gray-300"
+                      >免费基础版</span
+                    >
+                    <span
+                      class="px-3 py-1 bg-[#5E6AD2]/10 text-[#5E6AD2] rounded-full text-sm font-medium"
+                      >Free</span
+                    >
+                  </div>
+                </div>
+
+                <div class="p-4 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                  <h4 class="font-medium text-lg mb-2 flex items-center">
+                    <i class="ri-building-line text-[#5E6AD2] mr-2"></i>
+                    ToB服务
+                  </h4>
+                  <div class="space-y-2">
+                    <div
+                      class="flex items-center justify-between p-3 bg-white dark:bg-[#242436] rounded-lg"
+                    >
+                      <span class="text-gray-600 dark:text-gray-300"
+                        >API调用收费</span
+                      >
+                      <span
+                        class="px-3 py-1 bg-[#5E6AD2]/10 text-[#5E6AD2] rounded-full text-sm font-medium"
+                        >0.1元/次</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center justify-between p-3 bg-white dark:bg-[#242436] rounded-lg"
+                    >
+                      <span class="text-gray-600 dark:text-gray-300"
+                        >基础年费套餐</span
+                      >
+                      <span
+                        class="px-3 py-1 bg-[#5E6AD2]/10 text-[#5E6AD2] rounded-full text-sm font-medium"
+                        >5万元/年</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 长期规划 -->
+            <div
+              class="bg-white dark:bg-[#242436] rounded-xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm card-hover animate-fade-in"
+              style="animation-delay: 0.4s"
+            >
+              <div class="flex items-center mb-4">
+                <div
+                  class="w-12 h-12 rounded-full bg-[#5E6AD2]/10 text-[#5E6AD2] flex items-center justify-center"
+                >
+                  <i class="ri-rocket-line text-2xl"></i>
+                </div>
+                <h3 class="ml-4 font-semibold text-xl">长期规划（3年）</h3>
+              </div>
+
+              <div class="space-y-4">
+                <div class="p-4 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                  <h4 class="font-medium text-lg mb-2 flex items-center">
+                    <i class="ri-vip-crown-line text-[#FF8A00] mr-2"></i>
+                    增值服务
+                  </h4>
+                  <div class="space-y-2">
+                    <div
+                      class="flex items-center justify-between p-3 bg-white dark:bg-[#242436] rounded-lg"
+                    >
+                      <span class="text-gray-600 dark:text-gray-300"
+                        >高级会员</span
+                      >
+                      <div class="flex items-center">
+                        <span
+                          class="px-3 py-1 bg-[#FF8A00]/10 text-[#FF8A00] rounded-full text-sm font-medium mr-2"
+                          >9.9元/月</span
+                        >
+                        <span class="text-xs text-gray-500 dark:text-gray-400"
+                          >多模态分析</span
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="flex items-center justify-between p-3 bg-white dark:bg-[#242436] rounded-lg"
+                    >
+                      <span class="text-gray-600 dark:text-gray-300"
+                        >企业定制版</span
+                      >
+                      <div class="flex items-center">
+                        <span
+                          class="px-3 py-1 bg-[#FF8A00]/10 text-[#FF8A00] rounded-full text-sm font-medium"
+                          >定制</span
+                        >
+                        <span
+                          class="text-xs text-gray-500 dark:text-gray-400 ml-2"
+                          >深度数据报告</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-4 bg-[#F7F8FA] dark:bg-[#1F1F3A] rounded-lg">
+                  <h4 class="font-medium text-lg mb-2 flex items-center">
+                    <i class="ri-bar-chart-line text-[#5E6AD2] mr-2"></i>
+                    数据服务
+                  </h4>
+                  <div class="space-y-2">
+                    <div
+                      class="flex items-center justify-between p-3 bg-white dark:bg-[#242436] rounded-lg"
+                    >
+                      <span class="text-gray-600 dark:text-gray-300"
+                        >行业反诈白皮书</span
+                      >
+                      <span
+                        class="px-3 py-1 bg-[#5E6AD2]/10 text-[#5E6AD2] rounded-full text-sm font-medium"
+                        >年费制</span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center justify-between p-3 bg白 dark:bg-[#242436] rounded-lg"
+                    >
+                      <span class="text-gray-600 dark:text-gray-300"
+                        >监管预警系统</span
+                      >
+                      <span
+                        class="px-3 py-1 bg-[#5E6AD2]/10 text-[#5E6AD2] rounded-full text-sm font-medium"
+                        >政府采购</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 风险与对策 -->
+    <section id="risk" class="py-16 bg-[#F7F8FA] dark:bg-[#1F1F3A]"></section>
+    <script>
+      async function loadConfig() {
+        try {
+          const response = await fetch("config.json");
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const config = await response.json();
+
+          // Update head
+          document.title = config.pageTitle;
+          updateLinkHref(
+            document.querySelector('script[src*="tailwindcss.com"]'),
+            config.externalLinks.tailwindcss
+          );
+          updateLinkHref(
+            document.querySelector('link[href*="remixicon.css"]'),
+            config.externalLinks.remixicon
+          );
+          updateStyleImport(
+            document.styleSheets[0].cssRules[0],
+            config.externalLinks.googleFonts
+          );
+
+          // Update header
+          document.getElementById("headerTitle").textContent =
+            config.headerTitle;
+
+          // Update hero section
+          document.getElementById("heroTitle").textContent = config.hero.title;
+          document.getElementById("heroSubtitle").textContent =
+            config.hero.subtitle;
+
+          // Update team section
+          document.getElementById("teamName").textContent = config.team.name;
+          document.getElementById("teamBackground").textContent =
+            config.team.background;
+
+          const teamMembersList = document.getElementById("teamMembers");
+          teamMembersList.innerHTML = ""; // Clear existing members
+          config.team.members.forEach((member) => {
+            const listItem = document.createElement("li");
+            listItem.className = "flex items-center";
+            let iconClass =
+              member.role === "队长" ? "ri-user-star-line" : "ri-user-line";
+            let iconBg =
+              member.role === "队长" ? "bg-[#5E6AD2]" : "bg-[#8A94E9]";
+
+            listItem.innerHTML = `
+              <span class="${iconBg} w-8 h-8 rounded-full text-white flex items-center justify-center mr-3 flex-shrink-0">
+                <i class="${iconClass}"></i>
+              </span>
+              <div>
+                <p class="font-medium">${member.name}${
+              member.role ? " (" + member.role + ")" : ""
+            }</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400">${
+                  member.description
+                }</p>
+              </div>
+            `;
+            teamMembersList.appendChild(listItem);
+          });
+        } catch (error) {
+          console.error("Could not load config:", error);
+          // Optionally, update UI to show error messages if placeholders are still visible
+          document.getElementById("teamName").textContent =
+            "Error loading team name.";
+          document.getElementById("teamBackground").textContent =
+            "Error loading team background.";
+          const teamMembersList = document.getElementById("teamMembers");
+          teamMembersList.innerHTML =
+            '<li class="flex items-center">Error loading members.</li>';
+        }
+      }
+
+      function updateLinkHref(element, newHref) {
+        if (element && newHref) {
+          if (element.tagName === "SCRIPT") element.src = newHref;
+          if (element.tagName === "LINK") element.href = newHref;
+        }
+      }
+
+      function updateStyleImport(cssImportRule, newUrl) {
+        if (cssImportRule && cssImportRule.styleSheet && newUrl) {
+          const currentHref = cssImportRule.href;
+          // Reconstruct the @import rule with the new URL
+          const newImportRule = `@import url("${newUrl}");`;
+          // This is a bit tricky as CSSStyleSheet.insertRule or deleteRule might be needed
+          // For simplicity, if direct modification isn't straightforward, this might need a more robust solution
+          // or ensure the initial @import rule in <style> is minimal or placeholder.
+          // However, for this example, we'll assume the structure allows for simple replacement if possible,
+          // or we acknowledge this part might need more advanced handling for dynamic @import updates.
+          // A more robust way would be to remove the old rule and add a new one,
+          // or have a placeholder <link> element for this font and update its href.
+          // Given the limitations, we'll log if direct update isn't simple.
+          if (cssImportRule.href) {
+            // Attempting to modify href, though this is not standard for CSSImportRule
+            // A better approach would be to remove and re-add the rule, or use a <link> tag.
+            // For now, we'll leave it as a conceptual placeholder for dynamic update.
+            // console.log("Attempting to update @import URL. This might not work as expected in all browsers.");
+          }
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", loadConfig);
+
+      // Theme switcher logic (remains unchanged)
+      const themeSwitcher = document.getElementById("themeSwitcher");
+      const htmlElement = document.documentElement;
+
+      // Check for saved theme preference
+      if (localStorage.getItem("theme") === "dark") {
+        htmlElement.classList.add("dark");
+      }
+
+      themeSwitcher.addEventListener("click", () => {
+        htmlElement.classList.toggle("dark");
+        // Save theme preference
+        if (htmlElement.classList.contains("dark")) {
+          localStorage.setItem("theme", "dark");
+        } else {
+          localStorage.removeItem("theme");
+        }
+      });
+
+      // Animate progress bars on scroll (remains unchanged)
+      const progressBars = document.querySelectorAll(".progress-bar");
+      const animateProgress = (bar) => {
+        const targetWidth = bar.style.width; // Already set inline
+        bar.style.width = "0%"; // Reset for animation
+        setTimeout(() => {
+          bar.style.width = targetWidth;
+        }, 100); // Slight delay to ensure transition occurs
+      };
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateProgress(entry.target);
+              observer.unobserve(entry.target); // Animate only once
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      progressBars.forEach((bar) => {
+        observer.observe(bar);
+      });
+    </script>
+  </body>
+</html>
