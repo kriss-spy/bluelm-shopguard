@@ -6,22 +6,22 @@
     "subtitle": "基于vivo Agent平台与蓝心大模型，打造拟人化、多维度、动态验证的购物风险分析工具"
   },
   "team": {
-    "name": "SIGAI",
+    "name": "SIGAI39",
     "members": [
       {
         "name": "王迪",
         "role": "队长",
-        "description": "负责Agent核心逻辑开发、大模型提示词优化"
+        "description": "负责Agent核心逻辑开发、大模型提示词优化、网页demo开发"
       },
       {
         "name": "邢梓涵",
         "role": "",
-        "description": "负责数据收集、风险规则库构建、测试优化"
+        "description": "负责数据收集、风险规则库构建、大模型提示词优化、测试优化"
       },
       {
         "name": "刘丝语",
         "role": "",
-        "description": "负责UI交互设计、市场分析、文档撰写"
+        "description": "负责文档撰写、市场分析"
       }
     ],
     "background": "我们来自华中科技大学人工智能专业，具备很强的自然语言处理（NLP）能力，以及机器学习（ML）和AI Agent开发经验。本次项目结合vivo Agent平台和蓝心大模型，致力于打造一个实用的购物反诈助手，帮助消费者识别虚假宣传，减少受骗风险。"
