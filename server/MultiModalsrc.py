@@ -65,7 +65,6 @@ def stream_vivogpt():
             "ignore_eos": False,  # 是否忽略模型的EOS标志
             "skip_special_tokens": True  # 解码时跳过特殊token，如[CLS]等
         }
-
     }
 
     # 生成签名后的头部字段（含 APP_ID、签名等）
