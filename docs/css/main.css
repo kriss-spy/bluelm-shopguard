@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+:root {
+  --primary: #5e6ad2;
+  --primary-light: #8a94e9;
+  --success: #2cb67d;
+  --warning: #ff8a00;
+  --danger: #ff5470;
+  --background-light: #ffffff;
+  --background-dark: #1a1a2e;
+  --text-light: #1a1a2e;
+  --text-dark: #f7f8f8;
+  --card-light: #f7f8fa;
+  --card-dark: #242436;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}

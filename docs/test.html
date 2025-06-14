@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>购物反诈助手Agent - 作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#eff6ff",
+                100: "#dbeafe",
+                200: "#bfdbfe",
+                300: "#93c5fd",
+                400: "#60a5fa",
+                500: "#3b82f6",
+                600: "#2563eb",
+                700: "#1d4ed8",
+                800: "#1e40af",
+                900: "#1e3a8a",
+                950: "#172554",
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      * {
+        font-family: "Inter", system-ui, sans-serif;
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200"
+  >
+    <header
+      class="fixed w-full top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-800"
+    >
+      <div
+        class="container mx-auto px-4 py-3 flex justify-between items-center"
+      >
+        <h1 class="text-xl font-bold text-primary-600 dark:text-primary-400">
+          购物反诈助手Agent
+        </h1>
+        <div class="flex items-center gap-4">
+          <a
+            id="themeToggle"
+            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors"
+          >
+            <!-- Sun icon for dark mode (shows when in dark mode to switch to light) -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 dark:block hidden"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+              />
+            </svg>
+            <!-- Moon icon for light mode (shows when in light mode to switch to dark) -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 dark:hidden block"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container mx-auto px-4 pt-20 pb-12">
+      <!-- Hero Section -->
+      <section class="py-20 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">购物反诈助手Agent</h1>
+        <p
+          class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8"
+        >
+          基于vivo
+          Agent平台与蓝心大模型，打造拟人化、多维度、动态验证的购物风险分析工具
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a
+            href="#"
+            class="px-6 py-3 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors"
+          >
+            查看演示
+          </a>
+          <a
+            href="#"
+            class="px-6 py-3 bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+          >
+            了解更多
+          </a>
+        </div>
+      </section>
+
+      <!-- Team Section -->
+      <section id="team" class="py-16">
+        <h2 class="text-3xl font-bold text-center mb-12">团队介绍</h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-4">团队名称</h3>
+            <p class="text-gray-600 dark:text-gray-400">Loading team name...</p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-4">团队成员</h3>
+            <p class="text-gray-600 dark:text-gray-400">Loading members...</p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-4">团队背景</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              Loading team background...
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Background Section -->
+      <section id="background" class="py-16">
+        <h2 class="text-3xl font-bold text-center mb-12">背景与痛点</h2>
+        <p class="text-lg text-center mb-12 max-w-4xl mx-auto">
+          在电商、社交平台和二手交易市场中，虚假广告、低价诱骗、脱离平台交易等欺诈手段层出不穷，消费者往往难以辨别真伪。
+        </p>
+        <div class="grid md:grid-cols-4 gap-6">
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-4">价格欺诈</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              远低于市场价的商品（如"2999元的iPhone 15 Pro Max"）诱导冲动消费。
+            </p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-4">虚假宣传</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              夸大功效（如"一次美白3度"）、虚构权威背书（如"NASA技术认证"）。
+            </p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-4">支付风险</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              卖家引导微信私下转账，脱离平台担保，导致资金无法追回。
+            </p>
+          </div>
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 class="text-xl font-semibold mb-4">平台可信度</h3>
+            <p class="text-gray-600 dark:text-gray-400">
+              非正规渠道（如个人闲鱼卖家）假货率高，缺乏售后保障。
+            </p>
+          </div>
+        </div>
+        <p class="text-lg mt-12 max-w-4xl mx-auto">
+          传统反诈手段依赖人工经验或简单关键词匹配，无法结合语义理解、动态数据验证和风险量化评估，导致消费者仍面临较高受骗风险。
+        </p>
+      </section>
+
+      <!-- Other sections continue... -->
+    </main>
+
+    <footer
+      class="bg-gray-100 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700"
+    >
+      <div class="container mx-auto px-4 py-8">
+        <p class="text-center text-gray-600 dark:text-gray-400">
+          购物反诈助手Agent © 2025
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Theme toggle functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if user preference is stored
+        const savedTheme = localStorage.getItem("theme");
+
+        // Apply the saved theme or use system preference
+        if (savedTheme) {
+          // Apply saved user preference
+          document.documentElement.classList.toggle(
+            "dark",
+            savedTheme === "dark"
+          );
+        } else {
+          // Use system preference as default if no saved preference
+          const prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+          document.documentElement.classList.toggle("dark", prefersDark);
+          // Save this initial state
+          localStorage.setItem("theme", prefersDark ? "dark" : "light");
+        }
+
+        // Set up the theme toggle button
+        const themeToggle = document.getElementById("themeToggle");
+
+        themeToggle.addEventListener("click", function () {
+          // Toggle dark class on the html element
+          document.documentElement.classList.toggle("dark");
+
+          // Save user preference
+          const currentTheme = document.documentElement.classList.contains(
+            "dark"
+          )
+            ? "dark"
+            : "light";
+          localStorage.setItem("theme", currentTheme);
+        });
+      });
+    </script>
+  </body>
+</html>

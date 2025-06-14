@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>多模态 GPT 演示</title>
+  <style>
+    body {
+      margin: 0; padding: 0; font-family: sans-serif;
+      display: flex; flex-direction: column; height: 100vh;
+      background: linear-gradient(#f7f7f7, #dadada);
+    }
+    #chat-container {
+      flex: 1; overflow-y: auto; margin: 8px; padding: 8px; border: 1px solid #ccc;
+      border-radius: 6px; background-color: #fff;
+    }
+    .message {
+      margin: 6px 0; max-width: 70%; padding: 10px;
+      border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      animation: fadeInUp 0.2s forwards; opacity: 0; transform: translateY(5px);
+    }
+    .user { background: #d1ecf1; margin-left: auto; }
+    .assistant { background: #eff6f9; margin-right: auto; }
+    @keyframes fadeInUp {
+      to {opacity:1; transform: none;}
+    }
+    #editor {
+      width: 100%; min-height: 80px; border: 1px solid #ccc; border-radius: 4px;
+      margin: 8px; padding: 8px; background: #fff; overflow-y: auto;
+    }
+    #editor:focus { outline: 2px solid #b3d7ff; }
+    #actions {
+      display: flex; gap: 8px; margin: 0 8px 8px;
+    }
+    #send-btn {
+      padding: 6px 12px; cursor: pointer; background: #007bff; color: #fff; border: none;
+      border-radius: 4px; font-size: 14px;
+    }
+    #send-btn:hover {
+      background: #005dc1;
+    }
+    img.embedded {
+      max-width: 200px; height: auto; display: block; margin: 4px 0;
+      border: 1px solid #ccc; border-radius: 4px;
+    }
+    #user-config {
+      display:flex; gap:8px; align-items:center; margin:8px;
+    }
+    #user-id { width:120px; }
+  </style>
+</head>
+<body>
+
+<div id="user-config">
+  <label>用户ID: <input id="user-id" value="test_user"></label>
+  <label>身份:
+    <select id="user-type">
+      <option value="学生" selected>学生</option>
+      <option value="老师">老师</option>
+      <option value="开发者">开发者</option>
+      <option value="访客">访客</option>
+    </select>
+  </label>
+</div>
+
+<div id="chat-container"></div>
+
+<div contenteditable="true" id="editor" placeholder="在此输入文字，可粘贴/拖拽图片..."></div>
+
+<div id="actions">
+  <button id="send-btn">发送</button>
+</div>
+
+<script>
+  const chatContainer = document.getElementById("chat-container");
+  const editor = document.getElementById("editor");
+  const sendBtn = document.getElementById("send-btn");
+
+  const userIdInput = document.getElementById("user-id");
+  const userTypeSelect = document.getElementById("user-type");
+
+  // 一些可配置的推理参数
+  const defaultExtra = {
+    temperature: 0.9,
+    top_p: 0.7,
+    top_k: 50,
+    max_tokens: 2048,
+    repetition_penalty: 1.02,
+    stop: ["</end>"],
+    ignore_eos: false,
+    skip_special_tokens: true
+  };
+
+  // 处理粘贴图片
+  editor.addEventListener("paste", async (e) => {
+    const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+    for (const item of items) {
+      if (item.type.indexOf("image") === 0) {
+        e.preventDefault();
+        const blob = item.getAsFile();
+        const base64 = await fileToBase64(blob);
+        insertBase64Image(base64);
+      }
+    }
+  });
+
+  // 处理拖拽图片
+  editor.addEventListener("dragover", (e) => {
+    e.preventDefault();
+  });
+  editor.addEventListener("drop", async (e) => {
+    e.preventDefault();
+    if (!e.dataTransfer.files.length) return;
+    for (const file of e.dataTransfer.files) {
+      if (file.type.startsWith("image")) {
+        const base64 = await fileToBase64(file);
+        insertBase64Image(base64);
+      }
+    }
+  });
+
+  // 读取文件到Base64
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // 向编辑器插入图片
+  function insertBase64Image(base64) {
+    const img = document.createElement("img");
+    img.src = base64;
+    img.className = "embedded";
+    editor.appendChild(img);
+  }
+
+  // 解析编辑器内容，识别文本或图片
+  function parseEditorContent() {
+    const nodes = editor.childNodes;
+    const messages = [];
+    for (const node of nodes) {
+      if (node.nodeName === "IMG") {
+        // 图片消息
+        messages.push({
+          role: "user",
+          contentType: "image",
+          content: node.src
+        });
+      } else if (node.nodeType === Node.TEXT_NODE) {
+        // 纯文本节点
+        const txt = node.nodeValue.trim();
+        if (txt) {
+          messages.push({
+            role: "user",
+            contentType: "text",
+            content: txt
+          });
+        }
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // DOM元素（div, span等）
+        if (node.nodeName !== "IMG") {
+          const txt = node.textContent.trim();
+          if (txt) {
+            messages.push({
+              role: "user",
+              contentType: "text",
+              content: txt
+            });
+          }
+        }
+      }
+    }
+    return messages;
+  }
+
+  // 拼接用于展示的预览文本
+  function previewMessages(messages) {
+    return messages.map(m => m.contentType === "image" ? "[图片]" : m.content).join("\n");
+  }
+
+  // 添加新消息
+  function addMessage(role, text) {
+    const msgDiv = document.createElement("div");
+    msgDiv.className = `message ${role === "user" ? "user" : "assistant"}`;
+    msgDiv.textContent = text;
+    chatContainer.appendChild(msgDiv);
+    msgDiv.scrollIntoView({ behavior: "smooth" });
+    return msgDiv;
+  }
+
+  // 更新消息内容
+  function updateMessage(msgDiv, text) {
+    msgDiv.textContent = text;
+    msgDiv.scrollIntoView({ behavior: "smooth" });
+  }
+
+  // 点击发送
+  sendBtn.addEventListener("click", async () => {
+    const messages = parseEditorContent();
+    if (!messages.length) return;
+
+    addMessage("user", previewMessages(messages));
+    editor.innerHTML = "";
+
+    // 获取用户设定的id和身份
+    const user_id = userIdInput.value.trim() || "default_user";
+    const user_type = userTypeSelect.value;
+
+    // 组装请求体
+    const body = JSON.stringify({
+      messages,
+      model: "vivo-BlueLM-TB-Pro",
+      extra: defaultExtra,
+      user_id,
+      user_type
+    });
+
+    const loadingMsg = addMessage("assistant", "处理中...");
+
+    try {
+      const resp = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body
+      });
+      if (!resp.ok) {
+        updateMessage(loadingMsg, `请求失败：${resp.status} ${resp.statusText}`);
+        return;
+      }
+      const data = await resp.json();
+      if (data.reply) {
+        updateMessage(loadingMsg, data.reply);
+      } else if (data.error) {
+        updateMessage(loadingMsg, `API错误：${data.error} - ${data.message || ""}`);
+      } else {
+        updateMessage(loadingMsg, "无效的响应格式");
+      }
+    } catch (err) {
+      updateMessage(loadingMsg, String(err));
+    }
+  });
+</script>
+</body>
+</html>
